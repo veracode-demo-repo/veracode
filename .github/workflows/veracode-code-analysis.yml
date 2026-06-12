@@ -31,8 +31,6 @@ on:
       - unidentified-lang-policy-scan
       - ruby-pipeline-scan
       - ruby-policy-scan
-      - apex-pipeline-scan
-      - apex-policy-scan
 
 jobs:
   cleanup:
