@@ -1,3 +1,4 @@
+debug: true
 veracode_static_scan:
   build:
     packager_image: acckarthikbharadwaj/scm-packaging:1
