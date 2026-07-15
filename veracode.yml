@@ -1,4 +1,6 @@
 veracode_static_scan:
+  build:
+    packager_image: acckarthikbharadwaj/scm-packaging:1
   push:
     trigger: true
     # Please only specify either branches_to_run or branches_to_exclude
