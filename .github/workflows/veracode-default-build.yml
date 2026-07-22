@@ -84,7 +84,6 @@ jobs:
 
           if [[ "${{ inputs.event_name }}" == *"ruby"* ]]; then
             source /etc/profile.d/rvm.sh
-            rvm pkg install openssl
             rvm install ruby-${{ inputs.ruby_version }}
           fi
 
