@@ -17,3 +17,4 @@ exclude_repos:
   - 'veracode'
   - 'test-workflow'
   - 'docker_builder'
+  - 'java-gradle-3'
