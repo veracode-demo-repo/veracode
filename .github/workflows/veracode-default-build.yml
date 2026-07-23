@@ -104,6 +104,7 @@ jobs:
             gem install bundler -v ${{ inputs.bundle_version }}
             bundle install
             cd ..
+            gem list | grep executable-hooks
           fi
           PACKAGE_CMD="veracode package --source source-code --output veracode-artifacts --trust --verbose"
 
