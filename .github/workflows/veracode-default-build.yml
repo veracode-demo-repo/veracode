@@ -105,7 +105,7 @@ jobs:
             bundle install
             cd ..
           fi
-          PACKAGE_CMD="veracode package --source source-code --output veracode-artifacts --trust --debug"
+          PACKAGE_CMD="veracode package --source source-code --output veracode-artifacts --trust --verbose"
 
           if [[ "${{ inputs.debug }}" == "true" ]]; then
             PACKAGE_CMD="$PACKAGE_CMD --verbose"
