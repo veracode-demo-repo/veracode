@@ -98,7 +98,11 @@ veracode_iac_secrets_scan:
     trigger: false
     commands:
       - "Veracode IAC Scan"
+      
 actions:
+  ruby:
+    version: 3.3.3
+    bundle: 2.5.16
   veracode_static_scan:
     build:
       packager_image: verainternalnk/scm-packaging:latest
