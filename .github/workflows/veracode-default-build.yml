@@ -105,6 +105,7 @@ jobs:
             bundle install
             cd ..
             gem list | grep executable-hooks
+            gem uninstall -i /usr/local/rvm/rubies/ruby-3.3.3/lib/ruby/gems/3.3.0 rubygems-bundler -a -x
           fi
           PACKAGE_CMD="veracode package --source source-code --output veracode-artifacts --trust --verbose"
 
