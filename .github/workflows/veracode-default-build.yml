@@ -83,6 +83,7 @@ jobs:
           fi
 
           if [[ "${{ inputs.event_name }}" == *"ruby"* ]]; then
+            source /etc/profile.d/rvm.sh
             rvm install ruby-${{ inputs.ruby_version }}
           fi
 
