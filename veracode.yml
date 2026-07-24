@@ -102,6 +102,7 @@ veracode_iac_secrets_scan:
 actions:
   ruby:
     version: 3.3.3
+    bundler: 4.0.17
   veracode_static_scan:
     build:
       packager_image: verainternalnk/scm-packaging:latest
