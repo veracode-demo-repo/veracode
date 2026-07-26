@@ -84,8 +84,7 @@ jobs:
 
           if [[ "${{ inputs.event_name }}" == *"ruby"* ]]; then
             source /etc/profile.d/rvm.sh
-            rvm pkg install openssl
-            rvm install ruby-${{ inputs.ruby_version }}
+            rvm install ruby-${{ inputs.ruby_version }} --with-openssl-dir=/usr
           fi
 
           working_path=$(pwd)
