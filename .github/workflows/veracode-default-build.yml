@@ -246,7 +246,13 @@ jobs:
               Write-Host "vswhere catch block executed."
             }
           }
-      - name: Fix Ruby DevKit on windows-latest
+      - name: Add Ruby to PATH
+        shell: pwsh
+        run: |
+          $rubyBin = "C:\hostedtoolcache\windows\Ruby\3.3.11\x64\bin"
+          echo $rubyBin | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+
+      - name: Enable DevKit
         shell: bash
         run: ridk enable
 
