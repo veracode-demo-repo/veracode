@@ -104,7 +104,6 @@ jobs:
             gem install bundler -v ${{ inputs.bundle_version }}
             bundle install
             cd ..
-            gem list | grep executable-hooks
             RUBY_API_VERSION=$(echo "${{ inputs.ruby_version }}" | cut -d. -f1,2).0
             gem uninstall -i /usr/local/rvm/rubies/ruby-${{ inputs.ruby_version }}/lib/ruby/gems/${RUBY_API_VERSION}  rubygems-bundler -a -x
           fi
