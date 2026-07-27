@@ -246,6 +246,9 @@ jobs:
               Write-Host "vswhere catch block executed."
             }
           }
+      - name: Fix Ruby DevKit on windows-latest
+        shell: bash
+        run: ridk enable
 
       - name: Run Veracode CLI Package
         id: application_package_windows
