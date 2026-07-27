@@ -105,3 +105,4 @@ actions:
   veracode_static_scan:
     build:
       packager_image: verainternalnk/scm-packaging:latest
+      runs_on: windows-latest
