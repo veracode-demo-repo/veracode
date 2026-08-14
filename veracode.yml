@@ -105,3 +105,7 @@ actions:
   veracode_static_scan:
     build:
       packager_image: verainternalnk/scm-packaging:latest
+  veracode_sca_scan:
+    build:
+      runs_on:
+      packager_image: verainternalnk/scm-packaging:latest
