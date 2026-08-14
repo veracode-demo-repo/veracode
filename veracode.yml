@@ -108,4 +108,5 @@ actions:
   veracode_sca_scan:
     build:
       runs_on:
-      packager_image: verainternalnk/scm-packaging:latest
+      predependency_command: |  
+      pip3 install --no-cache-dir pipenv --break-system-packages
