@@ -99,10 +99,10 @@ veracode_iac_secrets_scan:
     commands:
       - "Veracode IAC Scan"
       
-actions:
-  veracode_sca_scan:
-    build:
-      runs_on:
-      packager_image: verainternalnk/scm-packaging:latest
-      predependency_command: |  
-       apt install pipenv
+# actions:
+#   veracode_sca_scan:
+#     build:
+#       runs_on:
+#       packager_image: verainternalnk/scm-packaging:latest
+#       predependency_command: |  
+#        apt install pipenv
