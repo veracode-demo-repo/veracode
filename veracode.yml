@@ -1,6 +1,4 @@
 debug: true
-default:
-  runs_on: windows-latest
 veracode_static_scan:
   push:
     trigger: true
