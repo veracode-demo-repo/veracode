@@ -36,13 +36,11 @@ jobs:
     runs-on: ${{ fromJSON(github.event.client_payload.user_config.default_runs_on) }}
     name: Veracode Component Analysis
     timeout-minutes: 30
-    container:
-      image: "veracode/scm-packaging:latest"
     
     steps:
       - name: Setup build environment (Linux)
         if: contains(runner.os, 'Linux')
-        run: docker pull ${{ inputs.build_packager_image }}
+        run: docker pull veracode/scm-packaging:latest
       - uses: actions/checkout@v4
         with:
           repository: ${{ github.event.client_payload.repository.full_name }}
