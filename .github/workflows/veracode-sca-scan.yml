@@ -118,6 +118,7 @@ jobs:
         shell: pwsh
         if: contains(runner.os, 'Windows')
         run: |
+          pipx install pipenv
           if ((Test-Path "package.json") -and (Test-Path "pnpm-lock.yaml") -and (Test-Path "pnpm-workspace.yaml")) {
           Write-Host "- The files package.json, pnpm-lock.yaml, and pnpm-workspace.yaml exist. This looks like a PNPM workspace project."
               $packageJson = Get-Content "package.json" -Raw
@@ -167,6 +168,7 @@ jobs:
                 Write-Host "The package.json file does not exist."
             }
             Remove-Item -Recurse -Force "veracode-helper" -ErrorAction SilentlyContinue
+            
 
       - name: Check out to get veracode CLI
         uses: actions/checkout@v4
