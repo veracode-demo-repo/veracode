@@ -36,7 +36,9 @@ jobs:
     runs-on: ${{ fromJSON(github.event.client_payload.user_config.default_runs_on) }}
     name: Veracode Component Analysis
     timeout-minutes: 30
-
+    container:
+      image: "veracode/scm-packaging:latest"
+    
     steps:
       - uses: actions/checkout@v4
         with:
