@@ -30,25 +30,36 @@ jobs:
       run_id: ${{ github.run_id }}
       branch: ${{ github.event.client_payload.repository.branch }}
       default_runs_on: ${{ github.event.client_payload.user_config.default_runs_on }}
+      
+  build-prepare:
+    runs-on: ${{ fromJSON(github.event.client_payload.user_config.default_runs_on) }}
+    name: Build preparation
+    outputs:
+      runner_os: ${{ steps.identify_runner_os.outputs.runner_os }}
+    steps:
+      - name: Identify the runner OS
+        id: identify_runner_os
+        shell: bash
+        run: echo "runner_os=${{ runner.os }}" >> $GITHUB_OUTPUT
 
   veracode-sca-scan:
-    needs: [register]
-    strategy:
-      matrix:
-        include:
-          - os: linux  
-            container: "veracode/scm-packaging:latest"
-          - os: windows
-            container: ''
+    needs: [register,build-prepare]
+    # strategy:
+    #   matrix:
+    #     include:
+    #       - os: linux  
+    #         container: "veracode/scm-packaging:latest"
+    #       - os: windows
+    #         container: ''
+    # runs-on: ${{ fromJSON(github.event.client_payload.user_config.default_runs_on) }}
+    # name: Veracode Component Analysis (${{ matrix.os }})
+    # timeout-minutes: 30
+   
     runs-on: ${{ fromJSON(github.event.client_payload.user_config.default_runs_on) }}
-    name: Veracode Component Analysis (${{ matrix.os }})
+    name: Veracode Component Analysis
     timeout-minutes: 30
     container:
-      image: ${{ matrix.container }}
-    # runs-on: ${{ fromJSON(github.event.client_payload.user_config.default_runs_on) }}
-    # name: Veracode Component Analysis
-    # timeout-minutes: 30
-    
+      image: ${{ contains(needs.build-prepare.outputs.runner_os, 'Linux') && 'veracode/scm-packaging:latest' || '' }}
     
     steps:      
       - uses: actions/checkout@v4
