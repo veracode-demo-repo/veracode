@@ -226,6 +226,7 @@ jobs:
           } catch {
             $msbuildAlreadyExists = $false
           }
+          Write-Output "Hello World"
           Write-Host "MSBuild install check: $msbuildAlreadyExists"
           if (-not $msbuildAlreadyExists) {
             $vswherePath = "${env:ProgramFiles(x86)}\Microsoft Visual Studio\Installer\vswhere.exe"
