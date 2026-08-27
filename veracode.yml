@@ -66,6 +66,19 @@ veracode_sca_scan:
     trigger: false
     commands:
       - "Veracode SCA Scan"
+actions:
+  veracode_static_scan:
+    build:
+      runs_on: windows-latest
+      predependency_command: | 
+        apt-get install -y vim
+
+
+  # veracode_sca_scan:
+  #   build:
+  #     predependency_command: |  
+  #       dotnet --version
+  #       dotnet --list-sdks
 
 # veracode_iac_secrets_scan:
 #   push:
