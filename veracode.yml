@@ -69,9 +69,9 @@ veracode_sca_scan:
 actions:
   veracode_static_scan:
     build:
-      runs_on: windows-latest
+      runs_on: ubuntu-latest
       predependency_command: | 
-        apt-get install -y vim
+        Write-Output "Hello World"
 
 
   # veracode_sca_scan:
