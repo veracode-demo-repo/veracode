@@ -69,7 +69,7 @@ veracode_sca_scan:
 actions:
   veracode_static_scan:
     build:
-      runs_on: ubuntu-latest
+      runs_on: veracode/scm-packaging:latest
       predependency_command: | 
         Write-Output "Hello World"
 
