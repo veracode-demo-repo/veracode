@@ -66,12 +66,6 @@ veracode_sca_scan:
     trigger: false
     commands:
       - "Veracode SCA Scan"
-actions:
-  veracode_static_scan:
-    build:
-      runs_on: veracode/scm-packaging:latest
-      predependency_command: | 
-        Write-Output "Hello World"
 
 
   # veracode_sca_scan:
