@@ -100,7 +100,8 @@ veracode_sca_scan:
 #     trigger: false
     # commands:
     #   - "Veracode IAC Scan"
-veracode_sca_scan:
+actions:
+  veracode_sca_scan:
     build:
       runs_on: windows-latest
       packager_image: veracode/scm-packaging:latest
