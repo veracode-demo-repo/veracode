@@ -40,7 +40,6 @@ debug: true
 #     trigger: false
 #     commands:
 #       - "Veracode Static Scan"
-
 veracode_sca_scan:
   push:
     trigger: true
