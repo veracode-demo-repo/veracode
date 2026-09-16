@@ -60,11 +60,11 @@ jobs:
       VERACODE_API_KEY_SECRET: '${{ secrets.VERACODE_API_KEY }}'
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           path: 'veracode-helper'
 
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           repository: ${{ inputs.repository }}
           ref: ${{ inputs.ref }}
@@ -84,7 +84,7 @@ jobs:
 
           if [[ "${{ inputs.event_name }}" == *"ruby"* ]]; then
             source /etc/profile.d/rvm.sh
-            rvm install ruby-${{ inputs.ruby_version }} 
+            rvm install ruby-${{ inputs.ruby_version }}
           fi
 
           working_path=$(pwd)
@@ -109,6 +109,10 @@ jobs:
           fi
           PACKAGE_CMD="veracode package --source source-code --output veracode-artifacts --trust"
 
+          if [[ "${{ inputs.event_name }}" =~ "pipeline" ]]; then
+            PACKAGE_CMD="$PACKAGE_CMD --skip-packagers sql,cobol"
+          fi
+
           if [[ "${{ inputs.debug }}" == "true" ]]; then
             PACKAGE_CMD="$PACKAGE_CMD --verbose"
           fi
@@ -123,7 +127,7 @@ jobs:
           echo "::error::Veracode static scan faced a problem. Please contact your Veracode administrator for more information."
 
       # ---------------- Upload artifact ----------------
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: veracode-artifact
           path: "${{ steps.application_package_linux.outputs.working_dir }}/veracode-artifacts/*"
@@ -139,11 +143,11 @@ jobs:
       VERACODE_API_KEY_SECRET: '${{ secrets.VERACODE_API_KEY }}'
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           path: 'veracode-helper'
 
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           repository: ${{ inputs.repository }}
           ref: ${{ inputs.ref }}
@@ -226,7 +230,6 @@ jobs:
           } catch {
             $msbuildAlreadyExists = $false
           }
-          Write-Output "Hello World"
           Write-Host "MSBuild install check: $msbuildAlreadyExists"
           if (-not $msbuildAlreadyExists) {
             $vswherePath = "${env:ProgramFiles(x86)}\Microsoft Visual Studio\Installer\vswhere.exe"
@@ -247,11 +250,6 @@ jobs:
               Write-Host "vswhere catch block executed."
             }
           }
-      - name: Add Ruby to PATH
-        shell: pwsh
-        run: |
-          $rubyBin = "C:\hostedtoolcache\windows\Ruby\3.3.11\x64\bin"
-          echo $rubyBin | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
 
       - name: Run Veracode CLI Package
         id: application_package_windows
@@ -270,6 +268,10 @@ jobs:
             $packageArgs += "--verbose"
           }
 
+          if ("${{ inputs.event_name }}" -like "*pipeline*") {
+            $packageArgs += "--skip-packagers sql,cobol"
+          }
+
           Write-Host "Running: veracode $($packageArgs -join ' ')"
           & $env:VERACODE_CLI @packageArgs
 
@@ -280,7 +282,7 @@ jobs:
           echo "::error::Veracode static scan faced a problem. Please contact your Veracode administrator for more information."
 
       # ---------------- Upload artifact ----------------
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: veracode-artifact
           path: "${{ steps.application_package_windows.outputs.working_dir }}/veracode-artifacts/*"
